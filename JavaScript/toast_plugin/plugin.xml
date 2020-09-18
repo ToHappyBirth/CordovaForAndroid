@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-toastdemo"
+    version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+	<!--插件名-->
+    <name>toast_plugin</name>
+	<!--js调用模块:src为调用插件的js文件路径-->
+    <js-module name="toast_plugin" src="www/toast_plugin.js">
+		<!--target 为插件安装后调用方法前缀 如：cordova.plugins.toast_plugin.[插件方法名]-->
+        <!-- <clobbers target="cordova.plugins.toast_plugin" /> -->
+		<!--可以自定义 调用时：ToastDemo.[插件方法名]-->
+		<clobbers target="ToastDemo" />
+    </js-module>
+	<!-- android 环境配置 -->
+    <platform name="android">
+		<!-- 插件安装时会将config-file标签中的内容添加至res/xml/config.xml文件中 -->
+        <config-file parent="/*" target="res/xml/config.xml">
+			<!-- name 为对应www/toast_plugin.js文件中的调用名称 -->
+            <feature name="ToastDemo">
+				<!-- value 为插件安装到项目中后ToastDemo.java的文件路径,即包路径 -->
+                <param name="android-package" value="com.msh.toastdemo.ToastDemo" />
+            </feature>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml"></config-file>
+        <!-- src 为插件目录中Java源文件路径,target-dir 为插件安装到项目后源文件路径 -->
+		<!-- 此处将target-dir 需修改为与包路径一致 -->
+		<source-file src="src/android/ToastDemo.java" target-dir="src/com/msh/toastdemo" />
+		
+		<!--src文件比如activity类-->
+		<source-file src="src/android/activity/PluginLoadActivity.java" target-dir="src/com/msh/toastdemo/android/activity"/>
+		<source-file src="src/android/activity/SunmiPrintLoading.java" target-dir="src/com/msh/toastdemo/android/activity"/>
+		<!--src文件比如 javabean类 utils工具类等Java文件-->
+		<source-file src="src/android/utils/BytesUtil.java" target-dir="src/com/msh/toastdemo/android/utils"/>
+		<source-file src="src/android/utils/ESCUtil.java" target-dir="src/com/msh/toastdemo/android/utils"/>
+		<source-file src="src/android/utils/SunmiPrintHelper.java" target-dir="src/com/msh/toastdemo/android/utils"/>
+		<source-file src="src/android/utils/ThreadPoolManager.java" target-dir="src/com/msh/toastdemo/android/utils"/>
+		<source-file src="src/android/utils/MResource.java" target-dir="src/com/msh/toastdemo/android/utils"/>
+		<!--布局文件-->
+		<source-file src="src/android/res/layout/activity_main.xml" target-dir= "res/layout"/>
+		<source-file src="src/android/res/layout/activity_sunmi_print_loading.xml" target-dir= "res/layout"/>
+		<!--库文件,依赖:jar包、aar包、so文件等-->
+		<source-file src="src/android/lib/core-3.3.0.jar" target-dir="libs"/>
+		<source-file src="src/android/lib/printerlibrary-1.0.8.aar" target-dir="libs"/>
+		<framework src="src/android/lib/build.gradle" custom="true" type="gradleReference"/>
+		<!--style文件-->
+		<source-file src="src/android/res/values/styles.xml" target-dir="res/values"/>
+		<!--drawable文件-->	
+		<source-file src="src/android/res/drawable/loading_bg.9.png" target-dir="res/drawable"/>
+		<source-file src="src/android/res/drawable/print_success.png" target-dir="res/drawable"/>
+		<!-- source-file 为源文件的相对路径, target-dir 为插件安装后项目中对应的路径 -->
+    </platform>
+</plugin>

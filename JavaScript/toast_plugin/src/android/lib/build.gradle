@@ -1,0 +1,19 @@
+repositories{
+    flatDir{
+        dirs 'libs'
+    }
+    jcenter()
+    google()
+}
+
+dependencies {
+    implementation files('libs/core-3.3.0.jar')
+    implementation(name: 'printerlibrary-1.0.8', ext: 'aar')
+}
+
+android {
+    packagingOptions {
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+}
